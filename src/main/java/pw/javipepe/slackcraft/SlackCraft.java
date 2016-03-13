@@ -15,6 +15,7 @@ import pw.javipepe.slackcraft.commands.PublicMessageCmd;
 import pw.javipepe.slackcraft.commands.SetSlackCmd;
 import pw.javipepe.slackcraft.listener.MentionListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -26,6 +27,7 @@ public class SlackCraft extends JavaPlugin {
 
     @Getter public static Map<UUID, String> connections = new HashMap<>();
     @Getter public static Map<UUID, String> usernames = new HashMap<>();
+    @Getter public static Map<UUID, ArrayList<String>> channelsListened = new HashMap<>();
 
     /**
      * Plugin desc.

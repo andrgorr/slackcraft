@@ -33,4 +33,5 @@ public class PrivateCmd {
             sender.sendMessage(ChatColor.RED + "An error occurred when posting message. Aborting.");
         }
     }
+
 }

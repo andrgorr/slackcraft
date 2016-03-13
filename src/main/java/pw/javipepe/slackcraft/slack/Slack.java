@@ -2,13 +2,16 @@ package pw.javipepe.slackcraft.slack;
 
 import com.ullink.slack.simpleslackapi.SlackChannel;
 import com.ullink.slack.simpleslackapi.SlackSession;
+import com.ullink.slack.simpleslackapi.events.SlackMessagePosted;
 import com.ullink.slack.simpleslackapi.impl.SlackSessionFactory;
+import com.ullink.slack.simpleslackapi.listeners.SlackMessagePostedListener;
 import lombok.Getter;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import pw.javipepe.slackcraft.SlackCraft;
 import pw.javipepe.slackcraft.utils.StringUtils;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author Javi
@@ -96,6 +99,30 @@ public class Slack {
         session.disconnect();
         return StringUtils.listToEnglishCompound(a, ChatColor.GOLD + "", ChatColor.RED + "");
     }
+
+    public void subscribePlayerToChannel(final String channel) throws Exception {
+        SlackSession session = SlackSessionFactory.createWebSocketSlackSession(token);
+        session.connect();
+
+        session.addMessagePostedListener(new SlackMessagePostedListener() {
+            @Override
+            public void onEvent(SlackMessagePosted slackMessagePosted, SlackSession slackSession) {
+                if(slackMessagePosted.getChannel().getName().equalsIgnoreCase(channel)) {
+                    Iterator it = SlackCraft.getChannelsListened().entrySet().iterator();
+
+                    while (it.hasNext()) {
+                        Map.Entry<UUID, ArrayList<String>> pair = (Map.Entry<UUID, ArrayList<String>>)it.next();
+                        if (pair.getValue().contains(slackMessagePosted.getChannel().getName())) {
+                            Bukkit.getPlayer(pair.getKey()).sendMessage(ChatColor.translateAlternateColorCodes('&', "&9[&6Slack Message in #&c" + slackMessagePosted.getChannel().getName() + "&9] &7From &7&l" + slackMessagePosted.getSender().getUserName() + "&r&7: " + slackMessagePosted.getMessageContent()));
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+
+
 
     /**
      * Send a private message to target

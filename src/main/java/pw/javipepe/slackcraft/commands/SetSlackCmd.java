@@ -65,6 +65,9 @@ public class SetSlackCmd {
             throw new CommandException("You are not connected to any slack.");
 
         SlackCraft.getConnections().remove(((Player)sender).getUniqueId());
+        if (SlackCraft.getChannelsListened().containsKey(((Player)sender).getUniqueId()))
+            SlackCraft.getChannelsListened().remove(((Player)sender).getUniqueId());
+
         sender.sendMessage(ChatColor.DARK_RED + "Disconnected.");
     }
 

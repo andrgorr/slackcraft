@@ -7,6 +7,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import pw.javipepe.slackcraft.SlackCraft;
 
+import java.util.ArrayList;
+
 /**
  * @author Javi
  */
@@ -33,5 +35,6 @@ public class MentionListener implements Listener {
         p.sendMessage(s.toString());
         p.sendMessage(ChatColor.AQUA + "                                  Made by Javipepe");
         p.sendMessage(ChatColor.RED + "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+        SlackCraft.getChannelsListened().put(event.getPlayer().getUniqueId(), new ArrayList<String>());
     }
 }

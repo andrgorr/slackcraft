@@ -1,0 +1,10 @@
+pw/javipepe/slackcraft/utils/StringUtils.class
+pw/javipepe/slackcraft/commands/SetSlackCmd.class
+pw/javipepe/slackcraft/commands/SetSlackCmd$1.class
+pw/javipepe/slackcraft/SlackCraft$1.class
+pw/javipepe/slackcraft/SlackCraft.class
+pw/javipepe/slackcraft/commands/PrivateCmd.class
+pw/javipepe/slackcraft/slack/Slack.class
+pw/javipepe/slackcraft/slack/Slack$1.class
+pw/javipepe/slackcraft/commands/PublicMessageCmd.class
+pw/javipepe/slackcraft/listener/MentionListener.class
